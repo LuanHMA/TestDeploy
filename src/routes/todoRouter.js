@@ -9,8 +9,8 @@ import {
 const router = Router();
 
 router.get("/", getData);
-router.post("/", createData);
-router.put("/", updateData);
-router.delete("/", deleteData);
+router.post("/save", createData);
+router.put("/edit", updateData);
+router.delete("/delete", deleteData);
 
 export const todoRouter = router;
