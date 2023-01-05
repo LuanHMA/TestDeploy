@@ -10,7 +10,7 @@ const router = Router();
 
 router.get("/", getData);
 router.post("/", createData);
-router.put("/:id", updateData);
+router.put("/", updateData);
 router.delete("/", deleteData);
 
 export const todoRouter = router;

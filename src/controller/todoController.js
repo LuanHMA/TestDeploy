@@ -1,14 +1,16 @@
 import { TodoModel } from "../database/models/todoModel.js";
 
 export const createData = async (req, res) => {
-  const { description, done } = req.body;
+  const { description } = req.body;
 
   return new TodoModel({
     description: description,
-    done: done,
   })
     .save()
-    .then(() => console.log("Todo created with success!"))
+    .then((data) => {
+      console.log("Todo created with success!");
+      res.send(data);
+    })
     .catch((error) => console.log("Error to creating todo: " + error));
 };
 export const getData = async (req, res) => {
@@ -21,13 +23,19 @@ export const updateData = async (req, res) => {
   const { _id, description, done } = req.body;
 
   TodoModel.findByIdAndUpdate(_id, { description: description, done: done })
-    .then(() => console.log("Edited with success"))
+    .then((data) => {
+      console.log("Todo edited with success!");
+      res.send(data);
+    })
     .catch((error) => console.log("Error to edit: " + error));
 };
 export const deleteData = async (req, res) => {
   const { _id } = req.body;
 
-  TodoModel.findByIdAndDelete({ _id: id })
-    .then(() => console.log("Deleted with success"))
+  TodoModel.findByIdAndDelete(_id)
+    .then((data) => {
+      console.log("Todo deleted with success");
+      res.send(data);
+    })
     .catch((error) => console.log("Error to delete: " + error));
 };
