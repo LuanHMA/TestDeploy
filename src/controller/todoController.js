@@ -23,9 +23,12 @@ export const updateData = async (req, res) => {
   const { _id, description, done } = req.body;
 
   TodoModel.findByIdAndUpdate(_id, { description: description, done: done })
-    .then((data) => {
+    .then(() => {
       console.log("Todo edited with success!");
-      res.send(data);
+
+      TodoModel.find({ _id: _id })
+        .then((data) => res.send(data))
+        .cacth((error) => console.log("Error retrieving data: " + error));
     })
     .catch((error) => console.log("Error to edit: " + error));
 };
